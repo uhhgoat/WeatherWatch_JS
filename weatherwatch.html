@@ -1,0 +1,162 @@
+<!DOCTYPE HTML>
+<html>
+	<!--
+		WEATHER WATCH
+		
+		The Weather Watch program tracks the weather month by month for an entire year.
+		
+		The RANGE array has a series of strings, one per month, that give you the possible ranges for temperature, snowfall, and rainfall.
+		
+		A string that looks like "13-32;0-10;0-2" means that the temperature will be between 13 and 32 degrees, the snowfall will be between 0 and 10 inches, and the rainfall will be between 0 and 2 inches.
+		
+		Run a simulation which goes through all 12 months and calculates the average temperature for the month, the total snowfall, and the total rainfall.  Generate random numbers based on the ranges provided.  Store this data in arrays.
+		
+		Finally, display the data in the table provided.
+	-->
+	<head>
+		<title>Stormwatch</title>
+		<style>
+			table {width:70%;margin:auto;margin-top:150px; text-align:center; background-color:cornflowerblue; border:thick solid black; font:24pt calibri;}
+			th {font-weight:bold; text-decoration:underline; border:thin solid black}
+			td {border: thin solid black;;}
+			div {width:100%; position:fixed; top:0; left:0; text-align:center; z-index:-1;}
+			div img {width:98%;}
+		</style>
+			
+		<script type = "text/javascript">
+			var JAN = 0, FEB = 1, MAR = 2, APR = 3, MAY = 4, JUN = 5, JUL = 6, AUG = 7, SEP = 8, OCT = 9, NOV = 10, DEC = 11;
+			
+			var TEMP = 0, SNOW = 1, RAIN = 2;
+		
+			RANGES = new Array("13-32;0-10;0-2", "14-35;0-12;0-2", "20-43;0-5;0-3", "32-57;0-1;1-3", "41-69;0-0;1-3", "51-77;0-0;1-4", "55-81;0-0;1-4", "54-80;0-0;0-3", "46-73;0-0;0-4", "36-60;0-1;0-3", "29-48;0-2;0-2", "19-36;0-6;1-2");
+			
+			avgTEMP = new Array() ;
+			avgSNOW = new Array() ;
+			avgRAIN = new Array() ;
+			
+			
+			function runWeather()
+			{
+				for(var m = JAN ; m <= DEC ; m++)
+				{
+					weather = RANGES[m].split(';') ;
+					
+					lowTEMP = parseInt(weather[TEMP].split('-')[0]) ;
+					highTEMP = parseInt(weather[TEMP].split('-')[1]) ;
+					lowSNOW = parseInt(weather[SNOW].split('-')[0]) ;
+					highSNOW = parseInt(weather[SNOW].split('-')[1]) ;
+					lowRAIN = parseInt(weather[RAIN].split('-')[0]) ;
+					highRAIN = parseInt(weather[RAIN].split('-')[1]) ;
+					
+					avgTEMP[m] = parseInt(Math.random()*(highTEMP-lowTEMP))+lowTEMP ;
+					avgSNOW[m] = parseInt(Math.random()*(highSNOW-lowSNOW))+lowSNOW ;
+					avgRAIN[m] = parseInt(Math.random()*(highRAIN-lowRAIN))+lowRAIN ;
+				}
+				display() ;
+			}
+			
+			function display()
+			{
+				cells = document.getElementsByTagName("td") ;
+				tdCtr = 0 ;
+				
+				for(var m = JAN ; m <= DEC ; m++)
+				{
+					cells[tdCtr].innerHTML = avgTEMP[m] ;
+					tdCtr++ ;
+					cells[tdCtr].innerHTML = avgSNOW[m] ;
+					tdCtr++ ;
+					cells[tdCtr].innerHTML = avgRAIN[m] ;
+					tdCtr++ ;
+				}
+			}
+		</script>
+	</head>
+		
+	<body onload = "runWeather() ;">
+		<div><img src = "weatherbg.png" /></div>
+		<table>
+			<tr>
+				<th></th>
+				<th>Average Temperature</th>
+				<th>Total Snowfall</th>
+				<th>Total Rainfall</th>
+			</tr>
+			<tr>
+				<th>January</th>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<th>February</th>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<th>March</th>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<th>April</th>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<th>May</th>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<th>June</th>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<th>July</th>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<th>August</th>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<th>September</th>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<th>October</th>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<th>November</th>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<th>December</th>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</table>
+		
+		<script type = "text/javascript">
+		</script>
+	</body>
+</html>
